@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'WBHTTPService'
-  s.version          = '0.0.2'
+  s.version          = '0.0.3'
   s.summary          = 'HTTP请求封装'
 
 # This description is used to generate tags and improve search results.
@@ -28,7 +28,7 @@ Pod::Spec.new do |s|
   s.source           = { :git => 'https://github.com/WBearJ/WBHTTPService.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.swift_versions = '5.2'
+  s.swift_versions = '5.0'
   s.ios.deployment_target = '12.0'
 
   s.source_files = 'WBHTTPService/Classes/**/*'
@@ -44,6 +44,6 @@ Pod::Spec.new do |s|
   s.dependency 'RxCocoa', '6.5.0'
   s.dependency 'Moya/RxSwift', '~> 15.0'
   s.dependency 'HandyJSON', '~>5.0.2'
-  
+  s.dependency 'WBTools'
   
 end

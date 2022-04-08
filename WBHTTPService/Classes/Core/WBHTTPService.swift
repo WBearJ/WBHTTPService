@@ -9,6 +9,7 @@ import Foundation
 import RxSwift
 import Moya
 import HandyJSON
+import WBTools
 
 public struct WBHTTPService {
     
@@ -103,11 +104,11 @@ extension WBHTTPService {
                 switch change {
                 case .began:
                     if wbTarget.showLoading {
-                        
+                        WBHUDTool.showCircle()
                     }
                 case .ended:
                     if wbTarget.showLoading {
-                        
+                        WBHUDTool.hide()
                     }
                 }
             }
