@@ -18,11 +18,17 @@ extension ObservableType where Element == Response {
 
 extension Response {
     func mapModel<T: WBHTTPResultCodable>(_ type: T.Type) -> T {
-        let jsonStr = String(data: data, encoding: .utf8)
+        var jsonDic = try? JSONSerialization.jsonObject(with: data) as? [String: Any]
+        if let result = jsonDic?["result"] as? [String: Any], result.isEmpty {
+            // 框架在空数据会创建一个空对象
+            jsonDic?.removeValue(forKey: "result")
+        }
+        
         #if DEBUG
-        print("==============服务器请求结果:===============\(jsonStr!)")
+            print("==============服务器请求结果:===============\n\(jsonDic!)")
         #endif
-        if let model = JSONDeserializer<T>.deserializeFrom(json: jsonStr) {
+        
+        if let model = JSONDeserializer<T>.deserializeFrom(dict: jsonDic) {
             return model
         }
         let errorData: [String: Any] = ["message": "数据格式化失败", "code": WBResponseCode.decodeFailure.rawValue]
